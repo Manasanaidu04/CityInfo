@@ -46,6 +46,8 @@ namespace CityInfo.API
 
             var connectionString = Configuration.GetConnectionString("CityInfoDBConnectionString");
             services.AddDbContext<CityInfoContext>(o => o.UseSqlServer(connectionString));
+
+            services.AddScoped<ICityInfoRepository, CityInfoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +65,8 @@ namespace CityInfo.API
             cityInfoContext.EnsureSeedDataForContext();
 
             app.UseStatusCodePages();
+
+            
             app.UseMvc();
 
             //app.Run(async (context) =>
